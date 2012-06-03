@@ -59,6 +59,11 @@ namespace Sample.Migrations
 
     internal class DataContext : DbContext
     {
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext,Configuration>());
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<List> Lists { get; set; } 
     }
 }
