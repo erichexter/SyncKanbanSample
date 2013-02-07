@@ -11,6 +11,7 @@ namespace BootstrapSupport
             bundles.Add(new ScriptBundle("~/js").Include(
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/jquery-migrate-{version}.js",
+                "~/Scripts/jquery-migrate-{version}.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/jquery.validate.js",
                 "~/scripts/jquery.validate.unobtrusive.js",
