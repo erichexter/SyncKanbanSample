@@ -1,0 +1,79 @@
+﻿ .postit {
+      list-style: none;
+  text-align:center;     
+  width: 100px;    
+  margin: 5px;    
+  min-height:100px;
+  max-height:100px;
+  padding-top:15px;
+  position:relative;   
+  border:1px solid #E8E8E8;  
+  border-top:10px solid #fdfd86;
+  font-family:'Reenie Beanie';    
+  font-size:22px;      
+  border-bottom-right-radius: 60px 5px;
+  /*display:inline-block;*/    
+
+  background: rgb(255,255,136); /* Old browsers */
+  background: -moz-linear-gradient(-45deg, rgba(255,255,136,1) 77%, rgba(255,255,214,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(77%,rgba(255,255,136,1)), color-stop(100%,rgba(255,255,214,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%); /* IE10+ */
+  background: linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffff88',GradientType=0 ); /* IE6-9 fallback on horizontal gradient */
+}
+  
+.columnHeads
+{
+    border-bottom: 1px dashed #999;
+}
+.columnHeads .column
+{
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+    min-height: inherit;
+    color: #1B84C5;
+    padding-top: 0px;
+}
+
+.column {
+    min-height: 280px;
+}
+.column4
+{
+    width: 10%;
+    float: left;
+}
+
+.taskBorder
+{
+  border: 1px solid #999;
+  padding: 10px;
+  background: #F2F8FC; /* old browsers */
+  background: -moz-linear-gradient(top, #F2F8FC 0%, #E1EAEF 100%); /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F2F8FC), color-stop(100%,#E1EAEF)); /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F8FC', endColorstr='#E1EAEF',GradientType=0 ); /* ie */
+  background: -o-linear-gradient(top, #F2F8FC 0%,#E1EAEF 100%); /* opera */
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+	min-height: 30px;
+	margin-top: 22px;
+}
+
+.connectedSortable {
+    /*background-color: red;*/
+    min-height: 280px;
+}
+.row
+{
+    margin: 0px 0;
+    padding: 15px;
+    border-bottom: 1px dashed #999;
+}
