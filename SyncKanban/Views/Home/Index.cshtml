@@ -1,41 +1,14 @@
-﻿<link href="~/Content/board.css" rel="stylesheet" />
-<div class="taskBorder"> 
-    <header class="columnHeads clearfix">
-        <span  data-bind="foreach: lists">
-            <div  data-bind="css: { 'column column4' : true}">
-                <p class="title" >
-                    <span data-bind="text: name"></span>
-                </p>
-            </div>
-        </span>
-    </header>
+﻿@model MvcApplication22.Controllers.HomeIndexModel
 
-    <div class="row clearfix sortParent" data-bind="foreach: lists">
-        <div class="column column4 clearfix" >
-            <ul class="connectedSortable" data-bind="sortable: tasks">
-                <li class="postit" data-bind="attr:{'data-id': id},text: name "></li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-<div id="extra"></div>
-<div id="message" data-bind="flash: lastAction"></div>
-<div id="error" data-bind="flash: lastError"></div>
-
-@section Scripts
-{
-    <script src="~/signalr/hubs" type="text/javascript"></script>
-    <script src="~/Scripts/home-index.js"  type="text/javascript"></script>
-    <script language="javascript" >
-        $(function() {
-            var vm = new dashboardViewModel(@Model);
-            ko.bindingHandlers.sortable.afterMove = vm.itemDropped;
-            ko.bindingHandlers.sortable.connectClass = "connectedSortable";
-            ko.bindingHandlers.sortable.options.dropOnEmpty = true;
-            ko.applyBindings(vm);
-            $.connection.hub.start(function() { vm.init(); });
-        });
-    </script>
-
+@{
+    ViewBag.Title = "Index";
 }
+
+<h2>Boards</h2>
+
+<table class="table table-striped">
+@foreach (var board in Model.Boards)
+{
+<tr><td>@Html.ActionLink(board.Name,"board",new{id=board.Id})</td></tr>    
+}
+</table>

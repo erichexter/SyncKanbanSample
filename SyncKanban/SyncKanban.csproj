@@ -288,6 +288,7 @@
     <Content Include="Views\shared\_BootstrapLayout.basic.cshtml" />
     <Content Include="Views\shared\_alerts.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Board.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
