@@ -12,13 +12,9 @@ namespace MvcApplication22.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
-	protected override void OnModelCreating(DbModelBuilder modelBuilder)
-	{
-	    Database.SetInitializer(new MigrateDatabaseToLatestVersion<MvcApplication22.Models.BoardContext, Configuration>());
-	}
 
         private int listId = 0;
         protected override void Seed(MvcApplication22.Models.BoardContext context)
