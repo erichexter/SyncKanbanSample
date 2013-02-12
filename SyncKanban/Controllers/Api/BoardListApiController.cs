@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using MvcApplication22.Models;
+using SyncKanban.Models;
 
-namespace MvcApplication22.Controllers
+namespace SyncKanban.Controllers
 {
     public class BoardListApiController : ApiController
     {
         // GET api/boardapi
         public IEnumerable<string> Get()
         {
-            return new string[] { "this is from the boardlistapi controller", "value2" };
+            return new[] {"this is from the boardlistapi controller", "value2"};
         }
 
         // GET api/boardapi/5
@@ -23,12 +20,12 @@ namespace MvcApplication22.Controllers
         }
 
         // POST api/boardapi
-        public List Post([FromBody]CreateList input)
+        public List Post([FromBody] CreateList input)
         {
-            using (var ctx = new BoardContext() )
+            using (var ctx = new BoardContext())
             {
-                var board = ctx.Boards.Where(b => b.Id == input.BoardId).First();
-                var list = new List() {Name = input.name};
+                Board board = ctx.Boards.Where(b => b.Id == input.BoardId).First();
+                var list = new List {Name = input.name};
                 board.Lists.Add(list);
                 ctx.Set<List>().Add(list);
                 ctx.SaveChanges();
@@ -37,7 +34,7 @@ namespace MvcApplication22.Controllers
         }
 
         // PUT api/boardapi/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MvcApplication22
+namespace SyncKanban
 {
     public class List
     {

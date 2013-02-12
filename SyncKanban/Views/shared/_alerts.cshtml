@@ -7,13 +7,13 @@
         @TempData[Alerts.ATTENTION]
     </div>
 }
-@foreach(string key in Alerts.ALL.Except(new[] {Alerts.ATTENTION}))
+@foreach (string key in Alerts.ALL.Except(new[] {Alerts.ATTENTION}))
+{
+    if (TempData.ContainsKey(key))
     {
-        if (TempData.ContainsKey(key))
-         {
-             <div class="alert alert-@key">
-                 <button type="button" class="close" data-dismiss="alert">x</button>
-                 @TempData[key]
-             </div>
-         }
+        <div class="alert alert-@key">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            @TempData[key]
+        </div>
     }
+}

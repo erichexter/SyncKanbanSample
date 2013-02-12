@@ -1,5 +1,4 @@
 @using System.Web.Optimization
-@using BootstrapSupport
 @using NavigationRoutes
 <!DOCTYPE html>
 <html lang="en">
@@ -36,11 +35,10 @@
             @RenderBody()   
             <hr>
             <footer>
-                <p>&copy; Company @System.DateTime.Now.ToString("yyyy")</p>
+                <p>&copy; Company @DateTime.Now.ToString("yyyy")</p>
             </footer> 
         </div>
-         @Scripts.Render("~/js")
-         @RenderSection("Scripts", required: false)
+        @Scripts.Render("~/js")
+        @RenderSection("Scripts", required: false)
     </body>
 </html>
-

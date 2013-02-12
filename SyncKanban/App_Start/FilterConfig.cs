@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace MvcApplication22
+namespace SyncKanban
 {
     public class FilterConfig
     {

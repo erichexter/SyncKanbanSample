@@ -1,11 +1,12 @@
+@using System.Reflection
 @using BootstrapSupport
-@model System.Collections.IEnumerable   
-    <h4>@Model.GetLabel() <small>Listing</small></h4>
+@model System.Collections.IEnumerable
+<h4>@Model.GetLabel() <small>Listing</small></h4>
 <table class="table table-striped">
     <caption></caption>
     <thead>
         <tr>
-            @foreach (var property in Model.VisibleProperties())
+            @foreach (PropertyInfo property in Model.VisibleProperties())
             {
                 <th>
                     @property.GetLabel().ToSeparatedWords()
@@ -15,15 +16,15 @@
         </tr>
     </thead>
     @{ int index = 0; }
-    @foreach (var model in Model)
+    @foreach (object model in Model)
     {
         ViewData[index.ToString()] = model;
         <tr>
-            @foreach (var property in model.VisibleProperties())
+            @foreach (PropertyInfo property in model.VisibleProperties())
             {
                 <td>
                     @Html.Display(index + "." + property.Name)
-                </td>                    
+                </td>
             }
             <td>
                 <div class="btn-group">
@@ -33,24 +34,22 @@
                     </a>
                     <ul class="dropdown-menu">
                         @{
-                            @Html.TryPartial("_actions", model)                            
-                            var routevalues = model.GetIdValue();  
+                            @Html.TryPartial("_actions", model)
+                            RouteValueDictionary routevalues = model.GetIdValue();
                             <li>@Html.ActionLink("Edit", "Edit", routevalues)</li>
                             <li>@Html.ActionLink("Details", "Details", routevalues)</li>
                             <li class="divider"></li>
                             <li>@Html.ActionLink("Delete", "Delete", routevalues)</li>
-                               
                         }
                     </ul>
                 </div>
 
             </td>
         </tr>
-            index++;
+        index++;
     }
 
 </table>
 <p>
     @Html.ActionLink("Create New", "Create", null, new {@class = "btn"})
 </p>
-

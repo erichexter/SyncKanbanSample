@@ -1,4 +1,5 @@
-﻿@model MvcApplication22.Controllers.HomeIndexModel
+﻿@using SyncKanban
+@model SyncKanban.Controllers.HomeIndexModel
 
 @{
     ViewBag.Title = "Index";
@@ -7,8 +8,8 @@
 <h2>Boards</h2>
 
 <table class="table table-striped">
-@foreach (var board in Model.Boards)
-{
-<tr><td>@Html.ActionLink(board.Name,"board",new{id=board.Id})</td></tr>    
-}
+    @foreach (Board board in Model.Boards)
+    {
+        <tr><td>@Html.ActionLink(board.Name, "board", new {id = board.Id})</td></tr>
+    }
 </table>

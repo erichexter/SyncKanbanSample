@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using MvcApplication22.Models;
+using SyncKanban.Models;
 
-namespace MvcApplication22.Controllers
+namespace SyncKanban.Controllers
 {
     public class BoardController : Controller
     {
@@ -14,17 +11,15 @@ namespace MvcApplication22.Controllers
         public BoardController(BoardContext context)
         {
             _context = context;
-        
         }
 
         public BoardController() : this(new BoardContext())
         {
-            
         }
 
         public ActionResult Index()
         {
-            return View(_context.Boards.Select(b=> new {b.Name,b.Id}).ToArray());
+            return View(_context.Boards.Select(b => new {b.Name, b.Id}).ToArray());
         }
 
         //
@@ -32,7 +27,7 @@ namespace MvcApplication22.Controllers
 
         public ActionResult Details(int id)
         {
-            return View(_context.Boards.AsNoTracking().First(board => board.Id==id));
+            return View(_context.Boards.AsNoTracking().First(board => board.Id == id));
         }
 
         public ActionResult Create()
@@ -44,21 +39,20 @@ namespace MvcApplication22.Controllers
         [HttpPost]
         public ActionResult Create(Board model)
         {
-           if (ModelState.IsValid)
-           {
-               _context.Boards.Add(model);
-               _context.SaveChanges();
-               return RedirectToAction("Index");
-           }
+            if (ModelState.IsValid)
+            {
+                _context.Boards.Add(model);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return View(model);
-
         }
 
 
         public ActionResult Edit(int id)
         {
-            var model = _context.Boards.First(board => board.Id == id);
-            return View("create",model);
+            Board model = _context.Boards.First(board => board.Id == id);
+            return View("create", model);
         }
 
         //
@@ -67,14 +61,13 @@ namespace MvcApplication22.Controllers
         [HttpPost]
         public ActionResult Edit(Board model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Boards.Attach(model);
                 return RedirectToAction("Index");
             }
 
-            return View("create",model);
+            return View("create", model);
         }
-
     }
 }

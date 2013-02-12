@@ -6,9 +6,9 @@ namespace NavigationRoutes
 {
     public class NamedRoute : Route
     {
-         string _name;
-         string _displayName;
-         List<NamedRoute> _childRoutes = new List<NamedRoute>();
+        private readonly List<NamedRoute> _childRoutes = new List<NamedRoute>();
+        private string _displayName;
+        private string _name;
 
         public NamedRoute(string name, string url, IRouteHandler routeHandler)
             : base(url, routeHandler)
@@ -30,7 +30,8 @@ namespace NavigationRoutes
             _name = name;
         }
 
-        public NamedRoute(string name, string displayName, string url, RouteValueDictionary defaults, RouteValueDictionary constraints,
+        public NamedRoute(string name, string displayName, string url, RouteValueDictionary defaults,
+                          RouteValueDictionary constraints,
                           RouteValueDictionary dataTokens, IRouteHandler routeHandler)
             : base(url, defaults, constraints, dataTokens, routeHandler)
         {
@@ -38,7 +39,8 @@ namespace NavigationRoutes
             _displayName = displayName;
         }
 
-        public NamedRoute(string name, string displayName, string url, MvcRouteHandler routeHandler) : base(url, routeHandler)
+        public NamedRoute(string name, string displayName, string url, MvcRouteHandler routeHandler)
+            : base(url, routeHandler)
         {
             _name = name;
             _displayName = displayName;
@@ -55,7 +57,12 @@ namespace NavigationRoutes
             get { return _displayName ?? _name; }
             set { _displayName = value; }
         }
-        public List<NamedRoute> Children { get { return _childRoutes; } }
+
+        public List<NamedRoute> Children
+        {
+            get { return _childRoutes; }
+        }
+
         public bool IsChild { get; set; }
     }
 }

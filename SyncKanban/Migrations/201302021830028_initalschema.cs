@@ -1,8 +1,7 @@
-namespace MvcApplication22.Migrations
+using System.Data.Entity.Migrations;
+
+namespace SyncKanban.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class initalschema : DbMigration
     {
         public override void Up()
@@ -15,7 +14,7 @@ namespace MvcApplication22.Migrations
                         Name = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Lists",
                 c => new
@@ -27,7 +26,7 @@ namespace MvcApplication22.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Boards", t => t.Board_Id)
                 .Index(t => t.Board_Id);
-            
+
             CreateTable(
                 "dbo.Tasks",
                 c => new
@@ -40,15 +39,14 @@ namespace MvcApplication22.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Lists", t => t.List_Id)
                 .Index(t => t.List_Id);
-            
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Lists", "Board_Id", "dbo.Boards");
             DropForeignKey("dbo.Tasks", "List_Id", "dbo.Lists");
-            DropIndex("dbo.Lists", new[] { "Board_Id" });
-            DropIndex("dbo.Tasks", new[] { "List_Id" });
+            DropIndex("dbo.Lists", new[] {"Board_Id"});
+            DropIndex("dbo.Tasks", new[] {"List_Id"});
             DropTable("dbo.Tasks");
             DropTable("dbo.Lists");
             DropTable("dbo.Boards");

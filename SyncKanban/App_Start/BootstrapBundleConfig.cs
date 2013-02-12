@@ -1,6 +1,4 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace BootstrapSupport
 {
@@ -21,15 +19,14 @@ namespace BootstrapSupport
                 "~/Scripts/knockout-sortable.js",
                 "~/Scripts/json2.js",
                 "~/Scripts/jquery.signalR-1.0.0-rc2.js"
-                
-                ));
+                            ));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/body.css",
                 "~/Content/bootstrap-responsive.css",
                 "~/Content/bootstrap-mvc-validation.css"
-                ));
+                            ));
         }
     }
 }

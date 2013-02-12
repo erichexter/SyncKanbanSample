@@ -1,4 +1,4 @@
-﻿namespace MvcApplication22
+﻿namespace SyncKanban
 {
     public class Task
     {

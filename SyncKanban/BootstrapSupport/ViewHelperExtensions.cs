@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -20,17 +21,18 @@ namespace BootstrapSupport
 
         public static string GetActionName(this LambdaExpression actionExpression)
         {
-            return ((MethodCallExpression)actionExpression.Body).Method.Name;
+            return ((MethodCallExpression) actionExpression.Body).Method.Name;
         }
 
         public static PropertyInfo[] VisibleProperties(this IEnumerable Model)
         {
-            var elementType = Model.GetType().GetElementType();
+            Type elementType = Model.GetType().GetElementType();
             if (elementType == null)
             {
                 elementType = Model.GetType().GetGenericArguments()[0];
             }
-            return elementType.GetProperties().Where(info => info.Name != elementType.IdentifierPropertyName()).ToArray();
+            return
+                elementType.GetProperties().Where(info => info.Name != elementType.IdentifierPropertyName()).ToArray();
         }
 
         public static PropertyInfo[] VisibleProperties(this Object model)
@@ -47,7 +49,7 @@ namespace BootstrapSupport
 
         public static object GetId(this object model)
         {
-            return model.GetType().GetProperty(model.IdentifierPropertyName()).GetValue(model,new object[0]);
+            return model.GetType().GetProperty(model.IdentifierPropertyName()).GetValue(model, new object[0]);
         }
 
 
@@ -58,11 +60,11 @@ namespace BootstrapSupport
 
         public static string IdentifierPropertyName(this Type type)
         {
-            if (type.GetProperties().Any(info => info.PropertyType.AttributeExists<System.ComponentModel.DataAnnotations.KeyAttribute>()))
+            if (type.GetProperties().Any(info => info.PropertyType.AttributeExists<KeyAttribute>()))
             {
                 return
                     type.GetProperties().First(
-                        info => info.PropertyType.AttributeExists<System.ComponentModel.DataAnnotations.KeyAttribute>())
+                        info => info.PropertyType.AttributeExists<KeyAttribute>())
                         .Name;
             }
             else if (type.GetProperties().Any(p => p.Name.Equals("id", StringComparison.CurrentCultureIgnoreCase)))
@@ -76,7 +78,8 @@ namespace BootstrapSupport
 
         public static string GetLabel(this PropertyInfo propertyInfo)
         {
-            var meta = ModelMetadataProviders.Current.GetMetadataForProperty(null, propertyInfo.DeclaringType, propertyInfo.Name);
+            ModelMetadata meta = ModelMetadataProviders.Current.GetMetadataForProperty(null, propertyInfo.DeclaringType,
+                                                                                       propertyInfo.Name);
             return meta.GetDisplayName();
         }
 
@@ -84,15 +87,14 @@ namespace BootstrapSupport
         {
             return Regex.Replace(value, "([A-Z][a-z])", " $1").Trim();
         }
-
     }
 
     public static class PropertyInfoExtensions
     {
         public static bool AttributeExists<T>(this PropertyInfo propertyInfo) where T : class
         {
-            var attribute = propertyInfo.GetCustomAttributes(typeof(T), false)
-                                .FirstOrDefault() as T;
+            var attribute = propertyInfo.GetCustomAttributes(typeof (T), false)
+                                        .FirstOrDefault() as T;
             if (attribute == null)
             {
                 return false;
@@ -102,7 +104,7 @@ namespace BootstrapSupport
 
         public static bool AttributeExists<T>(this Type type) where T : class
         {
-            var attribute = type.GetCustomAttributes(typeof(T), false).FirstOrDefault() as T;
+            var attribute = type.GetCustomAttributes(typeof (T), false).FirstOrDefault() as T;
             if (attribute == null)
             {
                 return false;
@@ -112,21 +114,22 @@ namespace BootstrapSupport
 
         public static T GetAttribute<T>(this Type type) where T : class
         {
-            return type.GetCustomAttributes(typeof(T), false).FirstOrDefault() as T;
+            return type.GetCustomAttributes(typeof (T), false).FirstOrDefault() as T;
         }
 
         public static T GetAttribute<T>(this PropertyInfo propertyInfo) where T : class
         {
-            return propertyInfo.GetCustomAttributes(typeof(T), false).FirstOrDefault() as T;
+            return propertyInfo.GetCustomAttributes(typeof (T), false).FirstOrDefault() as T;
         }
-		
+
         public static string LabelFromType(Type @type)
         {
             var att = GetAttribute<DisplayNameAttribute>(@type);
-            return att != null ? att.DisplayName 
-                : @type.Name.ToSeparatedWords();
+            return att != null
+                       ? att.DisplayName
+                       : @type.Name.ToSeparatedWords();
         }
-		
+
         public static string GetLabel(this Object Model)
         {
             return LabelFromType(Model.GetType());
@@ -134,7 +137,7 @@ namespace BootstrapSupport
 
         public static string GetLabel(this IEnumerable Model)
         {
-            var elementType = Model.GetType().GetElementType();
+            Type elementType = Model.GetType().GetElementType();
             if (elementType == null)
             {
                 elementType = Model.GetType().GetGenericArguments()[0];

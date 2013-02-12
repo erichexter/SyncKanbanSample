@@ -37,7 +37,7 @@
             result[dataName] = valueAccessor();
         }
 
-        ko.utils.arrayForEach(["afterAdd", "afterRender", "as", "beforeRemove", "includeDestroyed", "templateEngine", "templateOptions"], function (option) {
+        ko.utils.arrayForEach(["afterAdd", "afterRender", "as", "beforeRemove", "includeDestroyed", "templateEngine", "templateOptions"], function(option) {
             result[option] = options[option] || ko.bindingHandlers.sortable[option];
         });
 
@@ -174,7 +174,7 @@
                                     if (arg.sourceParent) {
                                         $(arg.sourceParent === arg.targetParent ? this : ui.sender).sortable('cancel');
                                     }
-                                    //for a draggable item just remove the element
+                                        //for a draggable item just remove the element
                                     else {
                                         $(el).remove();
                                     }

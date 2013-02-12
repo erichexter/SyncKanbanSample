@@ -3,7 +3,7 @@ using BootstrapSupport;
 
 namespace BootstrapMvcSample.Controllers
 {
-    public class BootstrapBaseController: Controller
+    public class BootstrapBaseController : Controller
     {
         public void Attention(string message)
         {

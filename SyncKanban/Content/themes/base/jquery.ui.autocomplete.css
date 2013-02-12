@@ -9,10 +9,11 @@
  * http://docs.jquery.com/UI/Autocomplete#theming
  */
 .ui-autocomplete {
-	position: absolute;
-	top: 0; /* #8656 */
-	cursor: default;
+    cursor: default;
+    position: absolute;
+    top: 0; /* #8656 */
 }
 
 /* workarounds */
-* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+
+* html .ui-autocomplete { width: 1px; } /* without this, the menu expands to 100% in IE6 */
