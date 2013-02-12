@@ -1,7 +1,10 @@
 ﻿<link href="~/Content/board.css" rel="stylesheet" />
+<h2>@Model.Board.Name</h2>
+<button id="btnAddList" class="btn"><i class="icon-plus"></i> Add List</button>
+<button id="btnAddTask" class="btn"><i class="icon-plus"></i> Add Task</button>
 <div class="taskBorder"> 
     <header class="columnHeads clearfix">
-        <span  data-bind="foreach: lists">
+        <span  data-bind="sortable: lists">
             <div  data-bind="css: { 'column column4' : true}">
                 <p class="title" >
                     <span data-bind="text: name"></span>
@@ -17,25 +20,52 @@
             </ul>
         </div>
     </div>
-
 </div>
 <div id="extra"></div>
 <div id="message" data-bind="flash: lastAction"></div>
 <div id="error" data-bind="flash: lastError"></div>
-
 @section Scripts
 {
-    <script src="~/signalr/hubs" type="text/javascript"></script>
-    <script src="~/Scripts/home-index.js"  type="text/javascript"></script>
+    <script src="~/signalr/hubs" type="text/javascript"> </script>
+    <script src="~/Scripts/home-index.js"  type="text/javascript"> </script>
     <script language="javascript" >
         $(function() {
-            var vm = new dashboardViewModel(@Model);
+            var vm = new dashboardViewModel(@Model.Id);
             ko.bindingHandlers.sortable.afterMove = vm.itemDropped;
-            ko.bindingHandlers.sortable.connectClass = "connectedSortable";
+            //ko.bindingHandlers.sortable.connectClass = "connectedSortable";
             ko.bindingHandlers.sortable.options.dropOnEmpty = true;
             ko.applyBindings(vm);
             $.connection.hub.start(function() { vm.init(); });
-        });
-    </script>
+            $("#btnAddList").click(function() {
+                var listname = prompt("List name");
+                var list = new List(listname, 0, []);
+                $.ajax({
+                    url: '/api/BoardListApi/',
+                    type: "POST",
+                    data: JSON.stringify({ BoardId: vm.boardId, name: listname }), //ko.toJSON({BoardId:vm.boardId,name:listname}),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data) {
+                        list.id = data.id;
+                        vm.lists.push(list);
+                    }
+                });
+            });
+            $("#btnAddTask").click(function() {
+                var taskname = prompt("Task name");
+                $.ajax({
+                    url: '/api/BoardTask/',
+                    type: "POST",
+                    data: JSON.stringify({ BoardId: vm.boardId, name: taskname }), //ko.toJSON({BoardId:vm.boardId,name:listname}),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data) {
+                        task = data;
+                        var newTask = new Task(task.Id, task.Name);
+                        vm.lists()[0].tasks.splice(0, 0, newTask);
+                    }
+                });
 
-}
+            });
+        });
+    </script>}

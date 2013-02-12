@@ -146,9 +146,16 @@
   <ItemGroup>
     <Compile Include="App_Start\BootstrapBundleConfig.cs" />
     <Compile Include="App_Start\ExampleLayoutsRouteConfig.cs" />
+    <Compile Include="Controllers\Api\BoardListApiController.cs" />
+    <Compile Include="Controllers\Api\BoardTaskController.cs" />
+    <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Migrations\201302021830028_initalschema.cs" />
     <Compile Include="Migrations\201302021830028_initalschema.Designer.cs">
       <DependentUpon>201302021830028_initalschema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201302111748034_listordering.cs" />
+    <Compile Include="Migrations\201302111748034_listordering.Designer.cs">
+      <DependentUpon>201302111748034_listordering.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BoardContext.cs" />
@@ -300,6 +307,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201302021830028_initalschema.resx">
       <DependentUpon>201302021830028_initalschema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201302111748034_listordering.resx">
+      <DependentUpon>201302111748034_listordering.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

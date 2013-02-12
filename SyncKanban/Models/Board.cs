@@ -12,3 +12,5 @@ namespace MvcApplication22
         public virtual ICollection<List> Lists { get; set; } 
     }
 }
+
+

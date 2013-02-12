@@ -21,8 +21,22 @@ namespace MvcApplication22.Controllers
 
         public ActionResult Board(int Id)
         {
-            return View(Id);
+            var model = new HomeBoardViewModel();
+            model.Id = Id;
+            using (var ctx = new BoardContext())
+            {
+                model.Board = ctx.Boards.First(board => board.Id == Id);
+            }
+
+            return View(model);
         }
+    }
+
+    public class HomeBoardViewModel
+    {
+        public int Id { get; set; }
+
+        public Board Board { get; set; }
     }
 
     public class HomeIndexModel
