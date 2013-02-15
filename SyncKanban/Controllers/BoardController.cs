@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using ShortBus;
 using SyncKanban.Models;
 
 namespace SyncKanban.Controllers
@@ -7,27 +8,26 @@ namespace SyncKanban.Controllers
     public class BoardController : Controller
     {
         private readonly BoardContext _context;
+        private readonly IMediator _mediator;
 
-        public BoardController(BoardContext context)
+        public BoardController(BoardContext context,IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
 
-        public BoardController() : this(new BoardContext())
-        {
-        }
 
         public ActionResult Index()
         {
-            return View(_context.Boards.Select(b => new {b.Name, b.Id}).ToArray());
+            var response = _mediator.Request(new BoardListQuery());                
+            return View(response.Data);
         }
 
-        //
-        // GET: /Default1/Details/5
 
         public ActionResult Details(int id)
         {
-            return View(_context.Boards.AsNoTracking().First(board => board.Id == id));
+            var response = _mediator.Request(new BoardQuery(){Id = id});
+            return View(response.Data);
         }
 
         public ActionResult Create()
@@ -55,9 +55,6 @@ namespace SyncKanban.Controllers
             return View("create", model);
         }
 
-        //
-        // POST: /Default1/Edit/5
-
         [HttpPost]
         public ActionResult Edit(Board model)
         {
@@ -70,4 +67,43 @@ namespace SyncKanban.Controllers
             return View("create", model);
         }
     }
+
+    public class BoardQuery:IQuery<Board>
+    {
+        public int Id { get; set; }
+    }
+
+    public class BoardQueryHandler:IQueryHandler<BoardQuery,Board>
+    {
+        public Board Handle(BoardQuery request)
+        {
+            using (var _context = new BoardContext())
+            {
+                return _context.Boards.AsNoTracking().Include("Lists.Name").First(board => board.Id == request.Id);
+            }
+        }
+    }
+    public class BoardListQuery:IQuery<BoardList[]>
+    {
+    }
+    public class BoardListQueryHandler:IQueryHandler<BoardListQuery , BoardList[]>
+    {
+
+        public BoardList[] Handle(BoardListQuery request)
+        {
+            using (var _context = new BoardContext())
+            {
+                return _context.Boards.Select(b => new BoardList() { Name = b.Name, Id = b.Id }).ToArray();
+            }
+        }
+    }
+
+    public class BoardList
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+    }
+       
+    
 }

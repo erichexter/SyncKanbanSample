@@ -63,6 +63,9 @@
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.1.0.0-rc2\lib\net40\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
@@ -72,6 +75,15 @@
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="ShortBus">
+      <HintPath>..\packages\ShortBus.2.0.16\lib\ShortBus.dll</HintPath>
+    </Reference>
+    <Reference Include="ShortBus.Markers">
+      <HintPath>..\packages\ShortBus.Markers.2.0.15\lib\ShortBus.Markers.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -94,10 +106,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
@@ -139,6 +147,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.5.3\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
     </Reference>
@@ -146,9 +157,25 @@
   <ItemGroup>
     <Compile Include="App_Start\BootstrapBundleConfig.cs" />
     <Compile Include="App_Start\ExampleLayoutsRouteConfig.cs" />
+    <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\Api\BoardListApiController.cs" />
     <Compile Include="Controllers\Api\BoardTaskController.cs" />
     <Compile Include="Controllers\BoardController.cs" />
+    <Compile Include="QuerysCommands\BoardList\GetBoardListsQuery.cs" />
+    <Compile Include="QuerysCommands\BoardList\GetBoardListsQueryHandler.cs" />
+    <Compile Include="QuerysCommands\MoveList\MoveListCommand.cs" />
+    <Compile Include="QuerysCommands\MoveList\MoveListCommandHandler.cs" />
+    <Compile Include="QuerysCommands\MoveTask\MoveTaskCommand.cs" />
+    <Compile Include="QuerysCommands\MoveTask\MoveTaskCommandHandler.cs" />
+    <Compile Include="Models\HomeBoardViewModel.cs" />
+    <Compile Include="QuerysCommands\HomeBoard\HomeBoardViewModelQuery.cs" />
+    <Compile Include="QuerysCommands\HomeBoard\HomeBoardViewModelQueryHandler.cs" />
+    <Compile Include="Models\HomeIndexModel.cs" />
+    <Compile Include="QuerysCommands\HomeIndex\HomeIndexQuery.cs" />
+    <Compile Include="QuerysCommands\HomeIndex\ModelIndexQueryHandler.cs" />
+    <Compile Include="DependencyResolution\IoC.cs" />
+    <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
+    <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
     <Compile Include="Migrations\201302021830028_initalschema.cs" />
     <Compile Include="Migrations\201302021830028_initalschema.Designer.cs">
       <DependentUpon>201302021830028_initalschema.cs</DependentUpon>

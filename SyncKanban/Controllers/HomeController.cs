@@ -1,44 +1,30 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using SyncKanban.Models;
+﻿using System.Web.Mvc;
+using BootstrapMvcSample.Controllers;
+using ShortBus;
 
 namespace SyncKanban.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BootstrapBaseController
     {
+        private readonly IMediator _mediator;
+
+        public HomeController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         public ActionResult Index()
         {
-            var model = new HomeIndexModel();
-            using (var ctx = new BoardContext())
-            {
-                model.Boards = ctx.Boards.OrderBy(b => b.Name).ToList();
-            }
-            return View(model);
+            var response = _mediator.Request(new HomeIndexQuery());
+            return View(response.Data);
         }
 
         public ActionResult Board(int Id)
         {
-            var model = new HomeBoardViewModel();
-            model.Id = Id;
-            using (var ctx = new BoardContext())
-            {
-                model.Board = ctx.Boards.First(board => board.Id == Id);
-            }
-
-            return View(model);
+            var response = _mediator.Request(new HomeBoardViewModelQuery(){Id = Id});
+            if(response.HasException())
+                Error(response.Exception.Message);
+            return View(response.Data);
         }
-    }
-
-    public class HomeBoardViewModel
-    {
-        public int Id { get; set; }
-
-        public Board Board { get; set; }
-    }
-
-    public class HomeIndexModel
-    {
-        public List<Board> Boards { get; set; }
     }
 }
