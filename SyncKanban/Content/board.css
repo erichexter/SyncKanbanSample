@@ -36,11 +36,11 @@
     text-align: center;
 }
 
-.column { min-height: 280px; }
+.column { min-height: 280px; horiz-align:center}
 
 .column4 {
     float: left;
-    width: 10%;
+    width: 24%;
 }
 
 .taskBorder {

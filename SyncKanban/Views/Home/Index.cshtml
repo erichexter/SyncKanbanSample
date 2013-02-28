@@ -10,6 +10,6 @@
 <table class="table table-striped">
     @foreach (Board board in Model.Boards)
     {
-        <tr><td>@Html.ActionLink(board.Name, "board", new {id = board.Id})</td></tr>
+        <tr><td>@Html.ActionLink(board.Name, "board", new { id = board.Id }, new { @class = "boardLink" })</td></tr>
     }
 </table>

@@ -2,10 +2,10 @@
 <h2>@Model.Board.Name</h2>
 <button id="btnAddList" class="btn"><i class="icon-plus"></i> Add List</button>
 <button id="btnAddTask" class="btn"><i class="icon-plus"></i> Add Task</button>
-<div class="taskBorder"> 
+<div class="taskBorder" style="display:none"> 
     <header class="columnHeads clearfix">
         <span  data-bind="sortable: lists">
-            <div  data-bind="css: { 'column column4' : true}">
+            <div  data-bind="css: { 'column column@(Model.Board.Lists.Count)' : true}">
                 <p class="title" >
                     <span data-bind="text: name"></span>
                 </p>
@@ -14,9 +14,9 @@
     </header>
 
     <div class="row clearfix sortParent" data-bind="foreach: lists">
-        <div class="column column4 clearfix" >
-            <ul class="connectedSortable" data-bind="sortable: tasks">
-                <li class="postit" data-bind="attr:{'data-id': id},text: name "></li>
+        <div class="column column@(Model.Board.Lists.Count) clearfix" >
+            <ul class="connectedSortable"  data-bind="sortable: tasks,attr:{'id':'drop_'+$index()}">
+                <li data-bind="attr:{'data-id': id},attr:{'class':'postit card_'+$index()},text: name "></li>
             </ul>
         </div>
     </div>
@@ -35,7 +35,9 @@
             //ko.bindingHandlers.sortable.connectClass = "connectedSortable";
             ko.bindingHandlers.sortable.options.dropOnEmpty = true;
             ko.applyBindings(vm);
-            $.connection.hub.start(function() { vm.init(); });
+            $.connection.hub.start(function () { vm.init();
+                $(".taskBorder").show();
+            });
             $("#btnAddList").click(function() {
                 var listname = prompt("List name");
                 var list = new List(listname, 0, []);

@@ -1,0 +1,34 @@
+﻿@model FunctionalTests.Models.FunctionalTestModel
+<script>
+    /// <reference path="../../../../Resources/UIFramework/Js/funcunit/uif.funcunit.helpers.js" />
+    // please see the url below for funcunit documentation
+    // http://funcunit.com/
+    module('HomepageSmokeTests', {
+        setup: function() {
+            S.open('@Url.Content("~/")');
+        },
+        teardown: function() {
+        }
+    });
+
+    test("should load", function() {
+        ok(S(".boardLink").size(), "Board Links Exist");
+    });
+
+    test("load board", function() {
+        S(".boardLink").click();
+        S('.postit').visible();
+if(true)
+        for (column = 0; column < 3; column++) {
+            for (i = 0; i < 12; i++) {
+                S('li.card_0').drag("#drop_" + (column+1));
+            }
+        }
+
+       for (column = 3; column > 0; column--) {
+            for (i = 0; i < 12; i++) {
+                S('#drop_' + column + ' > li.card_0').drag("#drop_" + (column-1));
+            }
+        }
+    });
+</script>

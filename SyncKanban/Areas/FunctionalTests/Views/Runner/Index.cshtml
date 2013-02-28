@@ -1,0 +1,44 @@
+﻿@model FunctionalTests.Models.FunctionalTestRunnerModel 
+@using FunctionalTests
+@{
+    this.Layout = null;
+    var title = "Functional Test Runner";
+    
+}
+<!doctype html>
+<html>
+    <head>
+        <link href="~/Content/qunit.css" rel="stylesheet" />
+        <script src="~/Scripts/funcunit.js"></script>
+    <script src="~/Scripts/testswarm.inject.js"></script>
+        @foreach (var test in Model.Tests)
+        {
+            try
+            {
+                @Html.Partial(test.GetTestPartial(), test);
+            }
+            catch (Exception e)
+            {   
+                throw new Exception(string.Format("Test: {0}\nFixture Controller: {1}\nFixture Action: {2}", test.FixtureController, test.TestName, test.FixtureAction), e);
+            }
+        }
+    </head>
+    <body>
+        <h1 id="qunit-header">@title</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <hr />
+        @if (Model.RunningAllTests)
+        {
+            <h3>Available Tests</h3>
+            <ul id="availableTests">
+            @foreach (var test in Model.Tests.Select(x => x.FixtureController))
+            {
+                <li>@Html.RouteLink(test, "FunctionalTests_default", new{test}, null)</li>
+            }
+            </ul>
+        }
+    </body>
+</html>

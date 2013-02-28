@@ -1,0 +1,15 @@
+﻿@model FunctionalTests.Models.FunctionalTestModel 
+<script>
+    /// <reference path="../../../../Resources/UIFramework/Js/funcunit/uif.funcunit.helpers.js"/>
+    // please see the url below for funcunit documentation
+    // http://funcunit.com/
+    module('AlwaysPass', {
+        setup: function () {
+            S.open('@Model.GetFixtureUrl(Url)');
+        }
+    });
+
+    test("i always pass", function () {
+        ok(true, "and i mean always");
+    });
+</script>

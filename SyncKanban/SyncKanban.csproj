@@ -73,6 +73,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="nTestSwarm.Interface">
+      <HintPath>..\packages\nTestSwarm.Interface.0.1\lib\net40\nTestSwarm.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -158,6 +161,12 @@
     <Compile Include="App_Start\BootstrapBundleConfig.cs" />
     <Compile Include="App_Start\ExampleLayoutsRouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Areas\FunctionalTests\Controllers\AlwayPassController.cs" />
+    <Compile Include="Areas\FunctionalTests\Controllers\HomepageController.cs" />
+    <Compile Include="Areas\FunctionalTests\Controllers\RunnerController.cs" />
+    <Compile Include="Areas\FunctionalTests\FunctionalTestsAreaRegistration.cs" />
+    <Compile Include="Areas\FunctionalTests\Models\FunctionalTestModel.cs" />
+    <Compile Include="Areas\FunctionalTests\Models\FunctionalTestRunnerModel.cs" />
     <Compile Include="Controllers\Api\BoardListApiController.cs" />
     <Compile Include="Controllers\Api\BoardTaskController.cs" />
     <Compile Include="Controllers\BoardController.cs" />
@@ -218,6 +227,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\qunit.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -281,8 +291,15 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\funcunit.js" />
     <Content Include="Scripts\home-index.js" />
     <Content Include="Scripts\html5shiv.js" />
+    <Content Include="Areas\FunctionalTests\Views\Web.config" />
+    <Content Include="Areas\FunctionalTests\Views\Runner\Index.cshtml" />
+    <Content Include="Areas\FunctionalTests\Views\AlwaysPass\Test.cshtml" />
+    <Content Include="Areas\FunctionalTests\Views\AlwaysPass\Index.cshtml" />
+    <Content Include="Areas\FunctionalTests\Views\Homepage\Index.cshtml" />
+    <Content Include="Areas\FunctionalTests\Views\Homepage\Test.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -304,6 +321,7 @@
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\knockout-sortable.js" />
+    <Content Include="Scripts\testswarm.inject.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
